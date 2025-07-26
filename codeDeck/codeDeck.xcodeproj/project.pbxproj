@@ -13,6 +13,7 @@
 		CBC2D5332E30FDB500D40BA1 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC2D5322E30FDB500D40BA1 /* Category.swift */; };
 		CBC2D5362E3100C000D40BA1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC2D5352E3100C000D40BA1 /* Constants.swift */; };
 		CBC2D5392E31049000D40BA1 /* Colour.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC2D5382E31048A00D40BA1 /* Colour.swift */; };
+		CBC2D53D2E35535F00D40BA1 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC2D53C2E35535F00D40BA1 /* Data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,8 @@
 		CBC2D5322E30FDB500D40BA1 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		CBC2D5352E3100C000D40BA1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CBC2D5382E31048A00D40BA1 /* Colour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colour.swift; sourceTree = "<group>"; };
+		CBC2D53B2E31D03800D40BA1 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		CBC2D53C2E35535F00D40BA1 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -155,6 +158,8 @@
 		CBC2D53A2E31B11D00D40BA1 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				CBC2D53B2E31D03800D40BA1 /* Network.swift */,
+				CBC2D53C2E35535F00D40BA1 /* Data.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -309,6 +314,7 @@
 				CBC2D5312E30F7B700D40BA1 /* Problem.swift in Sources */,
 				CBC2D5362E3100C000D40BA1 /* Constants.swift in Sources */,
 				CBC2D52F2E30F37E00D40BA1 /* ProblemStatus.swift in Sources */,
+				CBC2D53D2E35535F00D40BA1 /* Data.swift in Sources */,
 				CBC2D5332E30FDB500D40BA1 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

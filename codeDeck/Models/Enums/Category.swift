@@ -8,9 +8,9 @@
 import Foundation
 
 struct Category: Codable, Identifiable, Hashable {
-    let id: String           // Unique identifier like "arrays-hashing"
-    let name: String         // Display name like "Arrays & Hashing"
-    let problems: [Problem]  // Array of problems in this category
+    let id: String           // unique identifier like "arrays-hashing"
+    let name: String         // display name like "Arrays & Hashing"
+    let problems: [Problem]  // array of problems in this category
     
     var completedCount: Int {
         problems.filter { $0.status == .completed }.count
