@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB8E3DF82E3583C700CC856D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E3DF62E3583C700CC856D /* ContentView.swift */; };
+		CB8E3E0D2E359B4C00CC856D /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E3E0C2E359B4600CC856D /* CategoryView.swift */; };
+		CB8E3E0F2E359B8F00CC856D /* ProblemRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E3E0E2E359B8B00CC856D /* ProblemRowView.swift */; };
+		CB8E3E132E359C2900CC856D /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E3E122E359C2500CC856D /* SearchBar.swift */; };
+		CB8E3E152E359C3500CC856D /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E3E142E359C3100CC856D /* LoadingView.swift */; };
+		CB8E3E172E359C4100CC856D /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E3E162E359C3C00CC856D /* FilterButton.swift */; };
+		CB8E3E1A2E36E00A00CC856D /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E3E192E36921000CC856D /* CategoryViewModel.swift */; };
+		CB8E3E1D2E36FE4200CC856D /* ProblemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E3E1C2E36FE3800CC856D /* ProblemDetailView.swift */; };
+		CB8E3E1F2E411ECF00CC856D /* codeSolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E3E1E2E411ECF00CC856D /* codeSolView.swift */; };
 		CBC2D52D2E30F24600D40BA1 /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC2D52C2E30F24600D40BA1 /* Difficulty.swift */; };
 		CBC2D52F2E30F37E00D40BA1 /* ProblemStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC2D52E2E30F37E00D40BA1 /* ProblemStatus.swift */; };
 		CBC2D5312E30F7B700D40BA1 /* Problem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC2D5302E30F7B700D40BA1 /* Problem.swift */; };
@@ -36,6 +45,15 @@
 		CB5A013A2E2457D200DDDEE9 /* codeDeck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = codeDeck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB5A01482E2457D200DDDEE9 /* codeDeckTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = codeDeckTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB5A01522E2457D200DDDEE9 /* codeDeckUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = codeDeckUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB8E3DF62E3583C700CC856D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		CB8E3E0C2E359B4600CC856D /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
+		CB8E3E0E2E359B8B00CC856D /* ProblemRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemRowView.swift; sourceTree = "<group>"; };
+		CB8E3E122E359C2500CC856D /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		CB8E3E142E359C3100CC856D /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		CB8E3E162E359C3C00CC856D /* FilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
+		CB8E3E192E36921000CC856D /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
+		CB8E3E1C2E36FE3800CC856D /* ProblemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemDetailView.swift; sourceTree = "<group>"; };
+		CB8E3E1E2E411ECF00CC856D /* codeSolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = codeSolView.swift; sourceTree = "<group>"; };
 		CBC2D52C2E30F24600D40BA1 /* Difficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
 		CBC2D52E2E30F37E00D40BA1 /* ProblemStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemStatus.swift; sourceTree = "<group>"; };
 		CBC2D5302E30F7B700D40BA1 /* Problem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Problem.swift; sourceTree = "<group>"; };
@@ -100,6 +118,8 @@
 		CB5A01312E2457D200DDDEE9 = {
 			isa = PBXGroup;
 			children = (
+				CB8E3E182E36920200CC856D /* ViewModels */,
+				CB8E3E0B2E359AB800CC856D /* Views */,
 				CB8E3E072E35849700CC856D /* Services */,
 				CBC2D5342E30FF6300D40BA1 /* Utilities */,
 				CBC2D52A2E30F1F400D40BA1 /* Models */,
@@ -119,6 +139,45 @@
 				CB5A01522E2457D200DDDEE9 /* codeDeckUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		CB8E3E0B2E359AB800CC856D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CB8E3E1B2E36FE1A00CC856D /* Screens */,
+				CB8E3E112E359C1600CC856D /* Components */,
+				CB8E3E0E2E359B8B00CC856D /* ProblemRowView.swift */,
+				CB8E3E0C2E359B4600CC856D /* CategoryView.swift */,
+				CB8E3DF62E3583C700CC856D /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CB8E3E112E359C1600CC856D /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				CB8E3E162E359C3C00CC856D /* FilterButton.swift */,
+				CB8E3E142E359C3100CC856D /* LoadingView.swift */,
+				CB8E3E122E359C2500CC856D /* SearchBar.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		CB8E3E182E36920200CC856D /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				CB8E3E192E36921000CC856D /* CategoryViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		CB8E3E1B2E36FE1A00CC856D /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				CB8E3E1C2E36FE3800CC856D /* ProblemDetailView.swift */,
+				CB8E3E1E2E411ECF00CC856D /* codeSolView.swift */,
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 		CBC2D52A2E30F1F400D40BA1 /* Models */ = {
@@ -262,6 +321,9 @@
 			);
 			mainGroup = CB5A01312E2457D200DDDEE9;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				CB8E3E2D2E497ABC00CC856D /* XCRemoteSwiftPackageReference "SQLite.swift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = CB5A013B2E2457D200DDDEE9 /* Products */;
 			projectDirPath = "";
@@ -303,12 +365,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB8E3E132E359C2900CC856D /* SearchBar.swift in Sources */,
 				CBC2D52D2E30F24600D40BA1 /* Difficulty.swift in Sources */,
+				CB8E3E1D2E36FE4200CC856D /* ProblemDetailView.swift in Sources */,
+				CB8E3DF82E3583C700CC856D /* ContentView.swift in Sources */,
+				CB8E3E152E359C3500CC856D /* LoadingView.swift in Sources */,
 				CBC2D5392E31049000D40BA1 /* Colour.swift in Sources */,
+				CB8E3E172E359C4100CC856D /* FilterButton.swift in Sources */,
+				CB8E3E0D2E359B4C00CC856D /* CategoryView.swift in Sources */,
 				CBC2D5312E30F7B700D40BA1 /* Problem.swift in Sources */,
 				CBC2D5362E3100C000D40BA1 /* Constants.swift in Sources */,
 				CBC2D52F2E30F37E00D40BA1 /* ProblemStatus.swift in Sources */,
+				CB8E3E1A2E36E00A00CC856D /* CategoryViewModel.swift in Sources */,
 				CBC2D5332E30FDB500D40BA1 /* Category.swift in Sources */,
+				CB8E3E1F2E411ECF00CC856D /* codeSolView.swift in Sources */,
+				CB8E3E0F2E359B8F00CC856D /* ProblemRowView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -656,6 +727,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CB8E3E2D2E497ABC00CC856D /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.15.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = CB5A01322E2457D200DDDEE9 /* Project object */;
 }

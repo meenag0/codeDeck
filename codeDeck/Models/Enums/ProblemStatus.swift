@@ -11,7 +11,6 @@ import SwiftUI
 enum ProblemStatus: String, CaseIterable, Codable {
     case completed = "Completed"
     case attempted = "Attempted"
-    case bookmarked = "Bookmarked"
     
     var color: Color {
         switch self {
@@ -19,8 +18,6 @@ enum ProblemStatus: String, CaseIterable, Codable {
             return .green
         case .attempted:
             return .orange
-        case .bookmarked:
-            return .blue
         }
     }
     
@@ -30,8 +27,6 @@ enum ProblemStatus: String, CaseIterable, Codable {
             return "checkmark.circle.fill"
         case .attempted: 
             return "clock.circle.fill"
-        case .bookmarked: 
-            return "bookmark.fill"
         }
     }
     
@@ -41,8 +36,6 @@ enum ProblemStatus: String, CaseIterable, Codable {
             return "Completed"
         case .attempted:
             return "Attempted"
-        case .bookmarked:
-            return "Bookmarked"
         }
     }
     

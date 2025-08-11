@@ -1,5 +1,5 @@
 //
-//  Network.swift
+//  NetworkManager.swift
 //  codeDeck
 //
 //  Created by Meenakshi Gopalakrishnan on 2025-07-23.

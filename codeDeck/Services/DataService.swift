@@ -1,5 +1,5 @@
 //
-//  Data.swift
+//  DataService.swift
 //  codeDeck
 //
 //  Created by Meenakshi Gopalakrishnan on 2025-07-26.
@@ -59,7 +59,7 @@ class DataService: DataServiceProtocol {
                 Problem(id: "two-sum", title: "Two Sum", difficulty: .easy, status: .completed),
                 Problem(id: "valid-anagram", title: "Valid Anagram", difficulty: .easy, status: .attempted),
                 Problem(id: "contains-duplicate", title: "Contains Duplicate", difficulty: .easy),
-                Problem(id: "group-anagrams", title: "Group Anagrams", difficulty: .medium, status: .bookmarked)
+                Problem(id: "group-anagrams", title: "Group Anagrams", difficulty: .medium, status: .attempted)
             ]),
             Category(id: "two-pointers", name: "Two Pointers", problems: [
                 Problem(id: "valid-palindrome", title: "Valid Palindrome", difficulty: .easy, status: .completed),
