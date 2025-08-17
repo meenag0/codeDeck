@@ -135,27 +135,21 @@ struct ProblemDetailView: View {
             // problem Description
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    Text(mockProblemDescription)
+                    Text(problem.description ?? "No description available")
                         .font(.body)
                         .foregroundColor(.primary)
                     
                     // Example
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Example:")
-                            .font(.subheadline)
-                            .fontWeight(.semibold)
-                        
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("Input: [2,7,11,15], target = 9")
-                                .font(.system(.body, design: .monospaced))
-                                .padding(.horizontal, 12)
-                                .padding(.vertical, 8)
-                                .background(Color(.systemGray6))
-                                .cornerRadius(8)
+                    if let example = problem.example, !example.isEmpty {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Example:")
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
                             
-                            Text("Output: [0,1]")
+                            Text(example)
                                 .font(.system(.body, design: .monospaced))
                                 .padding(.horizontal, 12)
+                                .fixedSize(horizontal: false, vertical: true)
                                 .padding(.vertical, 8)
                                 .background(Color(.systemGray6))
                                 .cornerRadius(8)
@@ -177,42 +171,49 @@ struct ProblemDetailView: View {
                 Text("Solution")
                     .font(.caption)
                     .foregroundColor(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
             }
             
             // solution Content
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     // approach
-                    Text("Use a hash map to store numbers we've seen and their indices. For each number, check if its complement (target - current) exists in the map.")
-                        .font(.body)
-                        .foregroundColor(.primary)
+                    if let solution = problem.solution, !solution.isEmpty {
+                        Text(solution)
+                            .font(.body)
+                            .foregroundColor(.primary)
+                    } else {
+                        Text("No solution available")
+                            .font(.body)
+                            .foregroundColor(.secondary)
+                    }
+
                     
                     // complexity
                     VStack(alignment: .leading, spacing: 8) {
-                        HStack {
-                            Text("Time:")
-                                .fontWeight(.semibold)
-                            Text("O(n)")
-                                .font(.system(.body, design: .monospaced))
-                                .foregroundColor(.green)
+                        if let timeComplexity = problem.timeComplexity, !timeComplexity.isEmpty {
+                            HStack {
+                                Text("Time:")
+                                    .fontWeight(.semibold)
+                                Text(timeComplexity)
+                                    .font(.system(.body, design: .monospaced))
+                                    .foregroundColor(.green)
+                            }
                         }
                         
-                        HStack {
-                            Text("Space:")
-                                .fontWeight(.semibold)
-                            Text("O(n)")
-                                .font(.system(.body, design: .monospaced))
-                                .foregroundColor(.blue)
+                        if let spaceComplexity = problem.spaceComplexity, !spaceComplexity.isEmpty {
+                            HStack {
+                                Text("Space:")
+                                    .fontWeight(.semibold)
+                                Text(spaceComplexity)
+                                    .font(.system(.body, design: .monospaced))
+                                    .foregroundColor(.blue)
+                            }
                         }
                     }
                     .font(.caption)
                     
-                    // code snippet
-                    Text("class Solution:\n    def twoSum(self, nums: List[int]) -> bool:\n        seen = {}\n        for i, num in enumerate(nums):\n            complement = target - num\n            if complement in seen:\n                return [seen[complement], i]\n            seen[num] = i")
-                        .font(.system(.caption2, design: .monospaced))
-                        .padding(12)
-                        .background(Color(.systemGray6))
-                        .cornerRadius(8)
+
                 }
             }
             
@@ -287,15 +288,6 @@ struct ProblemDetailView: View {
         .padding(.bottom, 30)
     }
     
-    // Mock data
-    private var mockProblemDescription: String {
-        switch problem.id {
-        case "two-sum":
-            return "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order."
-        default:
-            return "Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct."
-        }
-    }
     
     private func updateProblemStatus(_ newStatus: ProblemStatus) {
         currProblemStatus = newStatus
