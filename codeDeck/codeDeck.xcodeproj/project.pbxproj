@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB4A63512E518A4B00EEF16A /* Judge0Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4A63502E518A3C00EEF16A /* Judge0Service.swift */; };
+		CB4A63532E518A8200EEF16A /* TestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4A63522E518A7F00EEF16A /* TestCase.swift */; };
+		CB4A63552E518AB100EEF16A /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4A63542E518AAF00EEF16A /* Config.swift */; };
 		CB8E3DF82E3583C700CC856D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E3DF62E3583C700CC856D /* ContentView.swift */; };
 		CB8E3E0D2E359B4C00CC856D /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E3E0C2E359B4600CC856D /* CategoryView.swift */; };
 		CB8E3E0F2E359B8F00CC856D /* ProblemRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E3E0E2E359B8B00CC856D /* ProblemRowView.swift */; };
@@ -46,6 +49,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CB4A63502E518A3C00EEF16A /* Judge0Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Judge0Service.swift; sourceTree = "<group>"; };
+		CB4A63522E518A7F00EEF16A /* TestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCase.swift; sourceTree = "<group>"; };
+		CB4A63542E518AAF00EEF16A /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		CB5A013A2E2457D200DDDEE9 /* codeDeck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = codeDeck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB5A01482E2457D200DDDEE9 /* codeDeckTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = codeDeckTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB5A01522E2457D200DDDEE9 /* codeDeckUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = codeDeckUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -194,6 +200,7 @@
 		CB8E3E552E4BBD8B00CC856D /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				CB4A63502E518A3C00EEF16A /* Judge0Service.swift */,
 				CB8E3E522E4BBD8B00CC856D /* Persistence */,
 				CB8E3E532E4BBD8B00CC856D /* DataService.swift */,
 				CB8E3E542E4BBD8B00CC856D /* NetworkManager.swift */,
@@ -212,6 +219,7 @@
 		CBC2D52B2E30F22D00D40BA1 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				CB4A63522E518A7F00EEF16A /* TestCase.swift */,
 				CBC2D52C2E30F24600D40BA1 /* Difficulty.swift */,
 				CBC2D52E2E30F37E00D40BA1 /* ProblemStatus.swift */,
 				CBC2D5302E30F7B700D40BA1 /* Problem.swift */,
@@ -223,6 +231,7 @@
 		CBC2D5342E30FF6300D40BA1 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				CB4A63542E518AAF00EEF16A /* Config.swift */,
 				CBC2D5372E31047600D40BA1 /* Extensions */,
 				CBC2D5352E3100C000D40BA1 /* Constants.swift */,
 			);
@@ -388,6 +397,7 @@
 			files = (
 				CB8E3E132E359C2900CC856D /* SearchBar.swift in Sources */,
 				CBC2D52D2E30F24600D40BA1 /* Difficulty.swift in Sources */,
+				CB4A63532E518A8200EEF16A /* TestCase.swift in Sources */,
 				CB8E3E1D2E36FE4200CC856D /* ProblemDetailView.swift in Sources */,
 				CB8E3DF82E3583C700CC856D /* ContentView.swift in Sources */,
 				CB8E3E152E359C3500CC856D /* LoadingView.swift in Sources */,
@@ -400,6 +410,8 @@
 				CB8E3E1A2E36E00A00CC856D /* CategoryViewModel.swift in Sources */,
 				CBC2D5332E30FDB500D40BA1 /* Category.swift in Sources */,
 				CB8E3E1F2E411ECF00CC856D /* codeSolView.swift in Sources */,
+				CB4A63552E518AB100EEF16A /* Config.swift in Sources */,
+				CB4A63512E518A4B00EEF16A /* Judge0Service.swift in Sources */,
 				CB8E3E572E4BBD8B00CC856D /* DatabaseManager.swift in Sources */,
 				CB8E3E5A2E4BBD8B00CC856D /* DataService.swift in Sources */,
 				CB8E3E5B2E4BBD8B00CC856D /* NetworkManager.swift in Sources */,
