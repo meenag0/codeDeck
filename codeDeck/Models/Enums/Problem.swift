@@ -13,9 +13,12 @@ struct Problem: Codable, Identifiable, Hashable {
     let id: String
     let title: String
     let difficulty: Difficulty  
-    let status: ProblemStatus?
+    var status: ProblemStatus?
     let description: String?
-    let hints: [String]?
+    let example: String?
+    let solution: String?
+    let timeComplexity: String?
+    let spaceComplexity: String?
     
     init(
         id: String,
@@ -23,13 +26,19 @@ struct Problem: Codable, Identifiable, Hashable {
         difficulty: Difficulty,
         status: ProblemStatus? = nil,
         description: String? = nil,
-        hints: [String]? = nil            
+        example: String? = nil,
+        solution: String? = nil,
+        timeComplexity: String? = nil,
+        spaceComplexity: String? = nil
     ) {
         self.id = id
         self.title = title
         self.difficulty = difficulty
         self.status = status
         self.description = description
-        self.hints = hints
+        self.example = example
+        self.solution = solution
+        self.timeComplexity = timeComplexity
+        self.spaceComplexity = spaceComplexity
     }
 }

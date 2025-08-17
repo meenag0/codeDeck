@@ -63,13 +63,12 @@ struct ProblemDetailView: View {
             
             Spacer()
             
-            // Status
+            // status
             if let status = problem.status {
                 Image(systemName: status.icon)
                     .foregroundColor(status.color)
                     .font(.title2)
             } else {
-                // Invisible placeholder to keep title centered
                 Image(systemName: "circle")
                     .foregroundColor(.clear)
                     .font(.title2)
@@ -81,7 +80,7 @@ struct ProblemDetailView: View {
         
     private var flashcard: some View {
         ZStack {
-            // Front of card (Problem)
+            // front of card (Problem)
             if !isFlipped {
                 problemCard
                     .opacity(isFlipped ? 0 : 1)
@@ -90,7 +89,7 @@ struct ProblemDetailView: View {
                         axis: (x: 0, y: 1, z: 0)
                     )
             } else {
-                // Back of card (Solution)
+                // back of card (Solution)
                 solutionCard
                     .opacity(isFlipped ? 1 : 0)
                     .rotation3DEffect(
@@ -115,7 +114,7 @@ struct ProblemDetailView: View {
     
     private var problemCard: some View {
         VStack(alignment: .leading, spacing: 20) {
-            // Header
+            // header
             HStack {
                 Text(problem.difficulty.rawValue)
                     .font(.caption)
@@ -133,7 +132,7 @@ struct ProblemDetailView: View {
                     .foregroundColor(.secondary)
             }
             
-            // Problem Description
+            // problem Description
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     Text(mockProblemDescription)
@@ -170,7 +169,7 @@ struct ProblemDetailView: View {
     
     private var solutionCard: some View {
         VStack(alignment: .leading, spacing: 20) {
-            // Header
+            // header
             HStack {
                 
                 Spacer()
@@ -180,15 +179,15 @@ struct ProblemDetailView: View {
                     .foregroundColor(.secondary)
             }
             
-            // Solution Content
+            // solution Content
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    // Approach
+                    // approach
                     Text("Use a hash map to store numbers we've seen and their indices. For each number, check if its complement (target - current) exists in the map.")
                         .font(.body)
                         .foregroundColor(.primary)
                     
-                    // Complexity
+                    // complexity
                     VStack(alignment: .leading, spacing: 8) {
                         HStack {
                             Text("Time:")
@@ -208,7 +207,7 @@ struct ProblemDetailView: View {
                     }
                     .font(.caption)
                     
-                    // Code snippet
+                    // code snippet
                     Text("class Solution:\n    def twoSum(self, nums: List[int]) -> bool:\n        seen = {}\n        for i, num in enumerate(nums):\n            complement = target - num\n            if complement in seen:\n                return [seen[complement], i]\n            seen[num] = i")
                         .font(.system(.caption2, design: .monospaced))
                         .padding(12)
@@ -217,7 +216,7 @@ struct ProblemDetailView: View {
                 }
             }
             
-            // Flip instruction
+            // flip instruction
             HStack {
                 Spacer()
                 Text("tap to flip")
@@ -236,7 +235,7 @@ struct ProblemDetailView: View {
 
     private var actionButtons: some View {
         VStack(spacing: 16) {
-            // Practice Coding Button
+            // practice coding button
             Button(action: {
                 showingCodingView = true
             }) {
@@ -253,7 +252,7 @@ struct ProblemDetailView: View {
                 .cornerRadius(12)
             }
             
-            // Status buttons (Secondary actions)
+            // status buttons (secondary actions)
             HStack(spacing: 40) {
                 // Red X button
                 Button(action: {
@@ -269,7 +268,7 @@ struct ProblemDetailView: View {
                         .clipShape(Circle())
                 }
                 
-                // Green checkmark button
+                // green checkmark button
                 Button(action: {
                     print("Marked correct")
                     updateProblemStatus(.completed)

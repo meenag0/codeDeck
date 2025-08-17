@@ -9,6 +9,13 @@ import SwiftUI
 
 @main
 struct codeDeckApp: App {
+    
+    init() {
+        // Initialize database on app launch
+        Task {
+            await DatabaseManager.shared.setup()
+        }
+    }
     var body: some Scene {
         WindowGroup {
             ContentView()

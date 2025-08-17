@@ -26,32 +26,83 @@ class DataService: DataServiceProtocol {
     private let networkManager: NetworkManagerProtocol
     private let baseURL = "https://your-api.com/api/v1"
     
+    private let useMockData: Bool
+    
+    
     // default init -> using real NetworkManager
-    init() {
+    init(useMockData: Bool = false) {
         self.networkManager = NetworkManager.shared
+        self.useMockData = useMockData
     }
     
     // custom init -> for mock NetworkManager
-    init(networkManager: NetworkManagerProtocol){
+    init(networkManager: NetworkManagerProtocol, useMockData: Bool = false) {
         self.networkManager = networkManager
+        self.useMockData = useMockData
     }
     
     func loadCategories() -> AnyPublisher<[Category], Error> {
-        return Just(mockCategories())
-            .setFailureType(to: Error.self)              // Allow for errors (even though mock won't fail)
-            .delay(for: .seconds(1), scheduler: DispatchQueue.main) // simulate network delay
+        if useMockData {
+            return Just(mockCategories())
+                .setFailureType(to: Error.self)
+                .delay(for: .seconds(1), scheduler: DispatchQueue.main)
+                .eraseToAnyPublisher()
+        } else {
+            return Future { promise in
+                Task {
+                    do {
+                        // get categories from database
+                        let categories = try await DatabaseManager.shared.getCategories()
+                        
+                        // get problems for each category
+                        var categoriesWithProblems: [Category] = []
+                        for category in categories {
+                            let problems = try await DatabaseManager.shared.getProblems(forCategoryId: category.id)
+                            let categoryWithProblems = Category(
+                                id: category.id,
+                                name: category.name,
+                                problems: problems
+                            )
+                            categoriesWithProblems.append(categoryWithProblems)
+                        }
+                        
+                        promise(.success(categoriesWithProblems))
+                    } catch {
+                        promise(.failure(error))
+                    }
+                }
+            }
+            .receive(on: DispatchQueue.main)  
             .eraseToAnyPublisher()
+        }
     }
-    
-    func updateProblemStatus(problemId: String, status: ProblemStatus) -> AnyPublisher<Void, Error> {
-        return Just(())  // () means "nothing" - just success
-            .setFailureType(to: Error.self)
-            .delay(for: .seconds(0.5), scheduler: DispatchQueue.main) // network delay
-            .eraseToAnyPublisher()
         
-        // TODO: Real API Implementation
+    func updateProblemStatus(problemId: String, status: ProblemStatus) -> AnyPublisher<Void, Error> {
+        if useMockData {
+            return Just(())
+                .setFailureType(to: Error.self)
+                .delay(for: .seconds(0.5), scheduler: DispatchQueue.main)
+                .eraseToAnyPublisher()
+        } else {
+            return Future { promise in
+                Task {
+                    do {
+                        try await DatabaseManager.shared.updateProblemStatus(
+                            problemId: problemId,
+                            newStatus: status
+                        )
+                        promise(.success(()))
+                    } catch {
+                        promise(.failure(error))
+                    }
+                }
+            }
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+        }
     }
-
+        
+        
     // mock data for testing
     private func mockCategories() -> [Category] {
         return [
@@ -73,3 +124,4 @@ class DataService: DataServiceProtocol {
         ]
     }
 }
+

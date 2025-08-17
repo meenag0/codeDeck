@@ -21,9 +21,8 @@ struct LoadingView: View {
                 .scaleEffect(1.2)
             
             Text(message)
-                .font(.body)                    // Standard body text size
+                .font(.body)                    
                 .foregroundColor(.secondary) 
         }
-
     }
 }

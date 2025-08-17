@@ -19,7 +19,7 @@ struct ProblemRowView: View {
     
     var body: some View {
         HStack(spacing: 12) {
-            // Status indicator dot
+            // status indicator dot
             Circle()
                 .fill(statusColor)
                 .frame(width: 8, height: 8)
@@ -38,7 +38,7 @@ struct ProblemRowView: View {
             
             Spacer()
             
-            // Status badge (if problem has a status)
+            // status badge (if problem has a status)
             if let status = problem.status {
                 HStack(spacing: 4) {
                     Image(systemName: status.icon)
@@ -56,17 +56,17 @@ struct ProblemRowView: View {
             }
         }
         .padding()
-        .contentShape(Rectangle()) // Makes entire row tappable
+        .contentShape(Rectangle())
     }
     
     // MARK: - Computed Properties
     private var statusColor: Color {
-        // If problem has no status, show gray dot
+        // if problem has no status, show gray dot
         guard let status = problem.status else {
             return Color(.systemGray4)
         }
         
-        // Otherwise use the status color
+        // otherwise use the status color
         return status.color
     }
 }
@@ -75,7 +75,7 @@ struct ProblemRowView: View {
 struct ProblemRowView_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 0) {
-            // Completed problem
+            // completed problem
             ProblemRowView(
                 problem: Problem(
                     id: "1",
@@ -87,7 +87,7 @@ struct ProblemRowView_Previews: PreviewProvider {
             
             Divider()
             
-            // Attempted problem
+            // attempted problem
             ProblemRowView(
                 problem: Problem(
                     id: "2",
@@ -99,7 +99,7 @@ struct ProblemRowView_Previews: PreviewProvider {
             
             Divider()
             
-            // Bookmarked problem
+            // bookmarked problem
             ProblemRowView(
                 problem: Problem(
                     id: "3",
@@ -110,7 +110,7 @@ struct ProblemRowView_Previews: PreviewProvider {
             
             Divider()
             
-            // Problem with no status
+            // problem with no status
             ProblemRowView(
                 problem: Problem(
                     id: "4",

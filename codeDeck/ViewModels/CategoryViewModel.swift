@@ -7,40 +7,59 @@
 
 import Foundation
 import Combine
+import SQLite
 
+@MainActor
 class CategoryViewModel: ObservableObject {
     
-    // Published properties automatically update the UI when changed
+    // published properties automatically update the UI when changed
     @Published var categories: [Category] = []
     @Published var isLoading = false
     @Published var errorMessage: String?
     
-    private let dataService = DataService()
-    private var cancellables = Set<AnyCancellable>()
+    private let db = DatabaseManager.shared
     
-    func loadCategories() {
+    func loadCategories() async {
         isLoading = true
         errorMessage = nil
         
-        dataService.loadCategories()
-            .sink(
-                receiveCompletion: { [weak self] completion in
-                    DispatchQueue.main.async {
-                        self?.isLoading = false
-                        
-                        if case .failure(let error) = completion {
-                            self?.errorMessage = "Failed to load categories: \(error.localizedDescription)"
-                        }
-                    }
-                },
-                receiveValue: { [weak self] categories in
-                    DispatchQueue.main.async {
-                        self?.categories = categories
-                    }
-                }
-            )
-            .store(in: &cancellables)
+        do {
+            let dbCategories = try await db.getCategories()   // fetch categories
+            
+            // fetch problems for each category
+            
+            var fullCategories: [Category] = []
+            for category in dbCategories {
+                let problems = try await db.getProblems(forCategoryId: category.id)
+                fullCategories.append(
+                    Category(
+                        id: category.id,
+                        name: category.name,
+                        problems: problems
+                    )
+                )
+            }
+            
+            categories = fullCategories
+            isLoading = false
+            
+        } catch {
+            errorMessage = "Failed to load categories: \(error.localizedDescription)"
+            isLoading = false
+        }
     }
+
+    func updateProblemStatus(problemId: String, newStatus: ProblemStatus) async {
+        try? await DatabaseManager.shared.updateProblemStatus(problemId: problemId, newStatus: newStatus)
+
+        // update local categories array
+        for catIndex in categories.indices {
+            if let probIndex = categories[catIndex].problems.firstIndex(where: { $0.id == problemId }) {
+                categories[catIndex].problems[probIndex].status = newStatus
+            }
+        }
+    }
+
     
     func filteredCategories(searchText: String) -> [Category] {
         

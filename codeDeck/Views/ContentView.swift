@@ -28,15 +28,21 @@ struct ContentView: View {
             }
             .padding(.horizontal)
             .onAppear {
-                viewModel.loadCategories()
+                Task {
+                    await viewModel.loadCategories()
+                }
             }
+
             .navigationDestination(for: Problem.self) { problem in
                 ProblemDetailView(
                     problem: problem,
                     onStatusUpdate: { updatedProblem, newStatus in
-                        viewModel.updateProblemStatus(problemId: updatedProblem.id, status: newStatus)
+                        Task {
+                            await viewModel.updateProblemStatus(problemId: updatedProblem.id, newStatus: newStatus)
+                        }
                     }
                 )
+
             }
         }
     }
@@ -121,8 +127,9 @@ struct ContentView: View {
                 .multilineTextAlignment(.center)
             
             Button("Try Again") {
-                viewModel.loadCategories()
-            }
+                Task {
+                    await viewModel.loadCategories()
+                }            }
             .buttonStyle(.borderedProminent)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

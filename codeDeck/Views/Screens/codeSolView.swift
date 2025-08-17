@@ -14,25 +14,20 @@ struct CodingSolutionView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            // Navigation Bar
             navigationBar
             
             
             VStack(spacing: 16) {
-                // Problem Title
                 problemHeader
                     .padding(.horizontal)
                 
-                // Code Editor
                 codeEditor
                     .frame(maxHeight: .infinity)
                     .padding(.horizontal)
                 
-                // Output Section
                 outputSection
                     .padding(.horizontal)
             }
-                // Action Buttons
             actionButtons
                 .padding()
         }
@@ -99,7 +94,7 @@ struct CodingSolutionView: View {
                 
                 Spacer()
                 
-                // Language selector (placeholder)
+                // language selector (placeholder)
                 Text("Python")
                     .font(.caption)
                     .padding(.horizontal, 8)
@@ -108,7 +103,7 @@ struct CodingSolutionView: View {
                     .cornerRadius(8)
             }
             
-            // Code input area
+            // code input area
             VStack {
                 TextEditor(text: $userSolution)
                     .font(.system(.body, design: .monospaced))

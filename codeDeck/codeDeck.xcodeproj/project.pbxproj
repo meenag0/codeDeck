@@ -16,6 +16,10 @@
 		CB8E3E1A2E36E00A00CC856D /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E3E192E36921000CC856D /* CategoryViewModel.swift */; };
 		CB8E3E1D2E36FE4200CC856D /* ProblemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E3E1C2E36FE3800CC856D /* ProblemDetailView.swift */; };
 		CB8E3E1F2E411ECF00CC856D /* codeSolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E3E1E2E411ECF00CC856D /* codeSolView.swift */; };
+		CB8E3E2F2E49AE3000CC856D /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = CB8E3E2E2E49AE3000CC856D /* SQLite */; };
+		CB8E3E572E4BBD8B00CC856D /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E3E4F2E4BBD8B00CC856D /* DatabaseManager.swift */; };
+		CB8E3E5A2E4BBD8B00CC856D /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E3E532E4BBD8B00CC856D /* DataService.swift */; };
+		CB8E3E5B2E4BBD8B00CC856D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E3E542E4BBD8B00CC856D /* NetworkManager.swift */; };
 		CBC2D52D2E30F24600D40BA1 /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC2D52C2E30F24600D40BA1 /* Difficulty.swift */; };
 		CBC2D52F2E30F37E00D40BA1 /* ProblemStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC2D52E2E30F37E00D40BA1 /* ProblemStatus.swift */; };
 		CBC2D5312E30F7B700D40BA1 /* Problem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC2D5302E30F7B700D40BA1 /* Problem.swift */; };
@@ -54,6 +58,9 @@
 		CB8E3E192E36921000CC856D /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 		CB8E3E1C2E36FE3800CC856D /* ProblemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemDetailView.swift; sourceTree = "<group>"; };
 		CB8E3E1E2E411ECF00CC856D /* codeSolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = codeSolView.swift; sourceTree = "<group>"; };
+		CB8E3E4F2E4BBD8B00CC856D /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		CB8E3E532E4BBD8B00CC856D /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		CB8E3E542E4BBD8B00CC856D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		CBC2D52C2E30F24600D40BA1 /* Difficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
 		CBC2D52E2E30F37E00D40BA1 /* ProblemStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemStatus.swift; sourceTree = "<group>"; };
 		CBC2D5302E30F7B700D40BA1 /* Problem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Problem.swift; sourceTree = "<group>"; };
@@ -83,11 +90,6 @@
 			path = design;
 			sourceTree = "<group>";
 		};
-		CB8E3E072E35849700CC856D /* Services */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Services;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB8E3E2F2E49AE3000CC856D /* SQLite in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,7 +123,7 @@
 			children = (
 				CB8E3E182E36920200CC856D /* ViewModels */,
 				CB8E3E0B2E359AB800CC856D /* Views */,
-				CB8E3E072E35849700CC856D /* Services */,
+				CB8E3E552E4BBD8B00CC856D /* Services */,
 				CBC2D5342E30FF6300D40BA1 /* Utilities */,
 				CBC2D52A2E30F1F400D40BA1 /* Models */,
 				CB5A016E2E247D6A00DDDEE9 /* design */,
@@ -180,6 +183,24 @@
 			path = Screens;
 			sourceTree = "<group>";
 		};
+		CB8E3E522E4BBD8B00CC856D /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				CB8E3E4F2E4BBD8B00CC856D /* DatabaseManager.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		CB8E3E552E4BBD8B00CC856D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				CB8E3E522E4BBD8B00CC856D /* Persistence */,
+				CB8E3E532E4BBD8B00CC856D /* DataService.swift */,
+				CB8E3E542E4BBD8B00CC856D /* NetworkManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		CBC2D52A2E30F1F400D40BA1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,10 +255,10 @@
 			fileSystemSynchronizedGroups = (
 				CB5A013C2E2457D200DDDEE9 /* codeDeck */,
 				CB5A016E2E247D6A00DDDEE9 /* design */,
-				CB8E3E072E35849700CC856D /* Services */,
 			);
 			name = codeDeck;
 			packageProductDependencies = (
+				CB8E3E2E2E49AE3000CC856D /* SQLite */,
 			);
 			productName = codeDeck;
 			productReference = CB5A013A2E2457D200DDDEE9 /* codeDeck.app */;
@@ -379,6 +400,9 @@
 				CB8E3E1A2E36E00A00CC856D /* CategoryViewModel.swift in Sources */,
 				CBC2D5332E30FDB500D40BA1 /* Category.swift in Sources */,
 				CB8E3E1F2E411ECF00CC856D /* codeSolView.swift in Sources */,
+				CB8E3E572E4BBD8B00CC856D /* DatabaseManager.swift in Sources */,
+				CB8E3E5A2E4BBD8B00CC856D /* DataService.swift in Sources */,
+				CB8E3E5B2E4BBD8B00CC856D /* NetworkManager.swift in Sources */,
 				CB8E3E0F2E359B8F00CC856D /* ProblemRowView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -738,6 +762,14 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CB8E3E2E2E49AE3000CC856D /* SQLite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CB8E3E2D2E497ABC00CC856D /* XCRemoteSwiftPackageReference "SQLite.swift" */;
+			productName = SQLite;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CB5A01322E2457D200DDDEE9 /* Project object */;
 }
