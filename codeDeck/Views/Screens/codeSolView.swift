@@ -10,8 +10,13 @@ import SwiftUI
 struct CodingSolutionView: View {
     let problem: Problem
     @State private var userSolution = ""
+    @State private var checkResult: CodeCheckResult?
+    @State private var isChecking = false
+    @State private var errorMessage: String?
     @Environment(\.dismiss) private var dismiss
     
+    private let codeChecker = CodeCheckingService()
+
     var body: some View {
         VStack(spacing: 0) {
             navigationBar
@@ -127,7 +132,7 @@ struct CodingSolutionView: View {
                 Spacer()
                 
                 Button("Check") {
-                    // TODO: Check solution
+                    Task { await runCodeCheck() }
                 }
                 .font(.body)
                 .fontWeight(.medium)
@@ -148,10 +153,49 @@ struct CodingSolutionView: View {
                 .stroke(Color(.systemGray4), lineWidth: 1)
                 .frame(minHeight: 120)
                 .overlay(
-                    Text("Run your code to see output")
-                        .font(.system(.body, design: .monospaced))
-                        .foregroundColor(.secondary)
+                    VStack(alignment: .leading, spacing: 8) {
+                        if isChecking {
+                            ProgressView("Checking solution...")
+                        } else if let err = errorMessage {
+                            Text(err).foregroundColor(.red)
+                        } else if let r = checkResult {
+                            // Feedback
+                            Text(r.feedback)
+                                .font(.system(.body, design: .monospaced))
+                                .foregroundColor(r.isCorrect ? .green : .red)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .padding(.bottom, 6)
+
+                            // Suggestions
+                            if !r.suggestions.isEmpty {
+                                Text("Suggestions:")
+                                    .font(.headline)
+                                ForEach(r.suggestions, id: \.self) { s in
+                                    Text("• \(s)")
+                                        .font(.system(.body, design: .monospaced))
+                                }
+                            }
+
+                            // Errors
+                            if !r.errors.isEmpty {
+                                Text("Issues:")
+                                    .font(.headline)
+                                    .padding(.top, 6)
+                                ForEach(r.errors, id: \.self) { e in
+                                    Text("• \(e)")
+                                        .foregroundColor(.red)
+                                        .font(.system(.body, design: .monospaced))
+                                }
+                            }
+                        } else {
+                            Text("Run your code to see output")
+                                .font(.system(.body, design: .monospaced))
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    .padding()
                 )
+
         }
     }
     
@@ -178,6 +222,21 @@ struct CodingSolutionView: View {
 
         }
     }
+    
+    private func runCodeCheck() async {
+        isChecking = true
+        errorMessage = nil
+        defer { isChecking = false }
+        do {
+            let result = try await codeChecker.checkCode(userSolution, for: problem)
+            checkResult = result
+        } catch {
+            errorMessage = "Failed to check solution: \(error.localizedDescription)"
+            checkResult = nil
+        }
+    }
+
+    
 }
 
 // MARK: - Preview
