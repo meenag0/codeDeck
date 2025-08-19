@@ -20,25 +20,24 @@ struct CodingSolutionView: View {
     var body: some View {
         VStack(spacing: 0) {
             navigationBar
+                VStack(spacing: 16) {
+                    problemHeader
+                        .padding(.horizontal)
+                    
+                    codeEditor
+                        .padding(.horizontal)
+                    
+                    outputSection
+                        .padding(.horizontal)
+                }
+
             
-            
-            VStack(spacing: 16) {
-                problemHeader
-                    .padding(.horizontal)
-                
-                codeEditor
-                    .frame(maxHeight: .infinity)
-                    .padding(.horizontal)
-                
-                outputSection
-                    .padding(.horizontal)
-            }
-            actionButtons
-                .padding()
         }
+        
         .background(Color(.systemBackground))
         .navigationBarHidden(true)
     }
+
     
     private var navigationBar: some View {
         HStack {
@@ -59,13 +58,6 @@ struct CodingSolutionView: View {
             
             Spacer()
             
-            Button(action: {
-                // TODO: Save solution
-            }) {
-                Image(systemName: "square.and.arrow.down")
-                    .font(.title2)
-                    .foregroundColor(.primary)
-            }
         }
         .padding()
         .background(Color(.systemBackground))
@@ -147,81 +139,96 @@ struct CodingSolutionView: View {
             }
             
             
-            // Output area
-            RoundedRectangle(cornerRadius: 12)
-                .fill(Color(.systemGray6))
-                .stroke(Color(.systemGray4), lineWidth: 1)
-                .frame(minHeight: 120)
-                .overlay(
-                    VStack(alignment: .leading, spacing: 8) {
-                        if isChecking {
-                            ProgressView("Checking solution...")
-                        } else if let err = errorMessage {
-                            Text(err).foregroundColor(.red)
-                        } else if let r = checkResult {
-                            // Feedback
-                            Text(r.feedback)
-                                .font(.system(.body, design: .monospaced))
-                                .foregroundColor(r.isCorrect ? .green : .red)
-                                .fixedSize(horizontal: false, vertical: true)
-                                .padding(.bottom, 6)
-
-                            // Suggestions
-                            if !r.suggestions.isEmpty {
-                                Text("Suggestions:")
-                                    .font(.headline)
-                                ForEach(r.suggestions, id: \.self) { s in
-                                    Text("• \(s)")
-                                        .font(.system(.body, design: .monospaced))
-                                }
+            ScrollView {
+                VStack(alignment: .leading, spacing: 8) {
+                    if isChecking {
+                        ZStack {
+                            Color.clear
+                            VStack {
+                                Spacer()
+                                Spacer()
+                                Spacer()
+                                Spacer()
+                                Spacer()
+                                Spacer()
+                                Spacer()
+                                ProgressView("Checking solution...")
                             }
-
-                            // Errors
-                            if !r.errors.isEmpty {
-                                Text("Issues:")
-                                    .font(.headline)
-                                    .padding(.top, 6)
-                                ForEach(r.errors, id: \.self) { e in
-                                    Text("• \(e)")
-                                        .foregroundColor(.red)
-                                        .font(.system(.body, design: .monospaced))
-                                }
-                            }
-                        } else {
-                            Text("Run your code to see output")
-                                .font(.system(.body, design: .monospaced))
-                                .foregroundColor(.secondary)
                         }
-                    }
-                    .padding()
-                )
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    } else if let err = errorMessage {
+                        Text(err)
+                            .foregroundColor(.red)
+                            .font(.system(.body, design: .monospaced))
+                    } else if let r = checkResult {
+                        Text(r.feedback)
+                            .font(.system(.body, design: .monospaced))
+                            .foregroundColor(r.isCorrect ? .green : .red)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding(.bottom, 6)
 
+                        
+                        if !r.suggestions.isEmpty {
+                            Text("Suggestions:")
+                                .font(.headline)
+                            ForEach(r.suggestions, id: \.self) { s in
+                                Text("• \(s)")
+                                    .font(.system(.body, design: .monospaced))
+                            }
+                        }
+
+                        if !r.errors.isEmpty {
+                            Text("Issues:")
+                                .font(.headline)
+                                .padding(.top, 6)
+                            ForEach(r.errors, id: \.self) { e in
+                                Text("• \(e)")
+                                    .foregroundColor(.red)
+                                    .font(.system(.body, design: .monospaced))
+                            }
+                        }
+                    } else {
+                        Text("Run your code to see output")
+                            .font(.system(.body, design: .monospaced))
+                            .foregroundColor(.secondary)
+                    }
+                }
+                .padding()
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .frame(height: 200)
+            .background(Color(.systemGray6))
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(Color(.systemGray4), lineWidth: 1)
+            )
         }
     }
     
-    private var actionButtons: some View {
-        HStack(spacing: 16) {
-            Button(action: {
-                dismiss()
-            }) {
-                HStack {
-                    Image(systemName: "arrow.left")
-                    Text("Back")
-                }
-                .font(.body)
-                .fontWeight(.medium)
-                .foregroundColor(.primary)
-                .padding(.horizontal, 20)
-                .padding(.vertical, 12)
-                .background(Color(.systemGray6))
-                .cornerRadius(25)
-            }
-            
-            Spacer()
-            
-
-        }
-    }
+//    private var actionButtons: some View {
+//        HStack(spacing: 16) {
+//            Button(action: {
+//                dismiss()
+//            }) {
+//                HStack {
+//                    Image(systemName: "arrow.left")
+//                    Text("Back")
+//                }
+//                .font(.body)
+//                .fontWeight(.medium)
+//                .foregroundColor(.primary)
+//                .padding(.horizontal, 20)
+//                .padding(.vertical, 12)
+//                .background(Color(.systemGray6))
+//                .cornerRadius(25)
+//            }
+//            
+//            Spacer()
+//            
+//
+//        }
+//    }
     
     private func runCodeCheck() async {
         isChecking = true

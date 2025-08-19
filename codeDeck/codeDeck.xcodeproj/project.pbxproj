@@ -21,7 +21,7 @@
 		CB8E3E172E359C4100CC856D /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E3E162E359C3C00CC856D /* FilterButton.swift */; };
 		CB8E3E1A2E36E00A00CC856D /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E3E192E36921000CC856D /* CategoryViewModel.swift */; };
 		CB8E3E1D2E36FE4200CC856D /* ProblemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E3E1C2E36FE3800CC856D /* ProblemDetailView.swift */; };
-		CB8E3E1F2E411ECF00CC856D /* codeSolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E3E1E2E411ECF00CC856D /* codeSolView.swift */; };
+		CB8E3E1F2E411ECF00CC856D /* CodeSolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E3E1E2E411ECF00CC856D /* CodeSolView.swift */; };
 		CB8E3E2F2E49AE3000CC856D /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = CB8E3E2E2E49AE3000CC856D /* SQLite */; };
 		CB8E3E572E4BBD8B00CC856D /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E3E4F2E4BBD8B00CC856D /* DatabaseManager.swift */; };
 		CB8E3E5A2E4BBD8B00CC856D /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E3E532E4BBD8B00CC856D /* DataService.swift */; };
@@ -69,7 +69,7 @@
 		CB8E3E162E359C3C00CC856D /* FilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
 		CB8E3E192E36921000CC856D /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 		CB8E3E1C2E36FE3800CC856D /* ProblemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemDetailView.swift; sourceTree = "<group>"; };
-		CB8E3E1E2E411ECF00CC856D /* codeSolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = codeSolView.swift; sourceTree = "<group>"; };
+		CB8E3E1E2E411ECF00CC856D /* CodeSolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeSolView.swift; sourceTree = "<group>"; };
 		CB8E3E4F2E4BBD8B00CC856D /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		CB8E3E532E4BBD8B00CC856D /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		CB8E3E542E4BBD8B00CC856D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -206,7 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				CB8E3E1C2E36FE3800CC856D /* ProblemDetailView.swift */,
-				CB8E3E1E2E411ECF00CC856D /* codeSolView.swift */,
+				CB8E3E1E2E411ECF00CC856D /* CodeSolView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -436,7 +436,7 @@
 				CB4A63572E525E5200EEF16A /* CodeCheckResult.swift in Sources */,
 				CB8E3E1A2E36E00A00CC856D /* CategoryViewModel.swift in Sources */,
 				CBC2D5332E30FDB500D40BA1 /* Category.swift in Sources */,
-				CB8E3E1F2E411ECF00CC856D /* codeSolView.swift in Sources */,
+				CB8E3E1F2E411ECF00CC856D /* CodeSolView.swift in Sources */,
 				CB4A63552E518AB100EEF16A /* Config.swift in Sources */,
 				CB8E3E572E4BBD8B00CC856D /* DatabaseManager.swift in Sources */,
 				CB4A636F2E538B9C00EEF16A /* CodeCheck.swift in Sources */,

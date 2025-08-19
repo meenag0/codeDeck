@@ -90,7 +90,6 @@ struct CategoryView: View {
                 }
                 .buttonStyle(PlainButtonStyle())
 
-                // Add divider between problems (except for last one)
                 if problem.id != category.problems.last?.id {
                     Divider()
                         .padding(.leading)
