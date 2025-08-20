@@ -35,6 +35,7 @@ struct ProblemDetailView: View {
                     .padding(.vertical, 8)
                 
                 actionButtons
+                    .padding(.top, 10)
             }
         }
         .background(Color(.systemBackground))
@@ -237,6 +238,8 @@ struct ProblemDetailView: View {
     private var actionButtons: some View {
         VStack(spacing: 16) {
             // practice coding button
+            
+            
             Button(action: {
                 showingCodingView = true
             }) {

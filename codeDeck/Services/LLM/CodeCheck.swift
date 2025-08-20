@@ -47,26 +47,47 @@ final class CodeCheckingService: CodeCheckingServiceProtocol {
 
 private extension CodeCheckingService {
     func buildPrompt(code: String, problem: Problem) -> String {
-        """
-        You are an expert code reviewer. Analyze the user's solution for the stated problem.
-        Output ONLY a JSON object:
+        let trimmedCode = code.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        return """
+        You are a code reviewer. Analyze the Python solution and respond with ONLY valid JSON.
 
+        RULES:
+        - If code is empty/whitespace only: mark as incorrect, ask for solution
+        - If code is not Python or irrelevant: mark as incorrect, explain issue
+        - If code has syntax errors: mark as incorrect, list specific errors
+        - If code is correct: provide brief positive feedback (max 50 words)
+        - If code is incorrect: explain what's wrong briefly (max 50 words)
+        - Always include time/space complexity for valid Python code
+        - Suggestions should be actionable (max 3 items)
+        
+        OUTPUT FORMAT (JSON only):
         {
           "isCorrect": boolean,
-          "feedback": "explain correctness, mention edge cases",
-          "suggestions": ["improve X", "handle Y"],
-          "errors": ["syntax or logic issues"]
+          "feedback": "Brief explanation (max 50 words)",
+          "suggestions": ["actionable tip 1", "actionable tip 2"],
+          "errors": ["specific error 1", "specific error 2"],
+          "timeComplexity": "O(n) or null if not applicable",
+          "spaceComplexity": "O(1) or null if not applicable"
         }
 
-        Problem Title: \(problem.title)
+        PROBLEM:
+        Title: \(problem.title)
         Difficulty: \(problem.difficulty.rawValue)
-        Description: \(problem.description ?? "")
-        Example: \(problem.example ?? "")
+        Description: \(problem.description ?? "No description provided")
+        Example: \(problem.example ?? "No example provided")
 
-        User's Python Solution:
-        ```python
-        \(code)
-        ```
+        USER SOLUTION:
+        \(trimmedCode.isEmpty ? "[EMPTY SUBMISSION]" : "```python\n\(trimmedCode)\n```")
+
+        EXAMPLES:
+        Empty: {"isCorrect": false, "feedback": "No solution provided.", "suggestions": ["Write a function to solve the problem"], "errors": ["No code"], "timeComplexity": null, "spaceComplexity": null}
+        
+        Correct: {"isCorrect": true, "feedback": "Correct solution with proper logic.", "suggestions": [], "errors": [], "timeComplexity": "O(n)", "spaceComplexity": "O(1)"}
+        
+        Wrong: {"isCorrect": false, "feedback": "Logic error in main algorithm.", "suggestions": ["Fix the loop condition", "Handle edge cases"], "errors": ["Incorrect comparison"], "timeComplexity": "O(n²)", "spaceComplexity": "O(n)"}
+
+        Respond with JSON only. No explanatory text before or after.
         """
     }
 }

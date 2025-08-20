@@ -51,12 +51,12 @@ struct CodingSolutionView: View {
             
             Spacer()
             
-            Text(problem.title)
-                .font(.headline)
-                .fontWeight(.semibold)
-                .lineLimit(1)
-            
-            Spacer()
+//            Text(problem.title)
+//                .font(.headline)
+//                .fontWeight(.semibold)
+//                .lineLimit(1)
+//            
+//            Spacer()
             
         }
         .padding()
