@@ -141,7 +141,6 @@ struct ProblemDetailView: View {
         }
     }
     
-    // REPLACE your problemCard with this:
     private var problemCard: some View {
         VStack(alignment: .leading, spacing: 24) {
             // modern header
@@ -171,7 +170,7 @@ struct ProblemDetailView: View {
                 }
             }
             
-            // Problem description
+            // problem description
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
                     Text(problem.description ?? "No description available")
@@ -179,7 +178,7 @@ struct ProblemDetailView: View {
                         .foregroundColor(.primaryText)
                         .lineSpacing(4)
                     
-                    // Modern example section
+                    // modern example section
                     if let example = problem.example, !example.isEmpty {
                         VStack(alignment: .leading, spacing: 12) {
                             HStack {
@@ -210,7 +209,7 @@ struct ProblemDetailView: View {
                 }
             }
             
-            // Subtle flip instruction
+            // subtle flip instruction
             HStack {
                 Spacer()
                 Image(systemName: "arrow.triangle.2.circlepath")
@@ -223,10 +222,9 @@ struct ProblemDetailView: View {
     }
     
 
-    // REPLACE your solutionCard with this:
     private var solutionCard: some View {
         VStack(alignment: .leading, spacing: 24) {
-            // Modern header
+            // modern header
             HStack {
                 Spacer()
                 
@@ -242,10 +240,10 @@ struct ProblemDetailView: View {
                 }
             }
             
-            // Solution content
+            // solution content
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
-                    // Approach
+                    // approach
                     if let solution = problem.solution, !solution.isEmpty {
                         Text(solution)
                             .font(FontStyle.bodyLarge)
@@ -257,7 +255,7 @@ struct ProblemDetailView: View {
                             .foregroundColor(.secondaryText)
                     }
                     
-                    // Modern complexity section
+                    // modern complexity section
                     VStack(alignment: .leading, spacing: 12) {
                         if let timeComplexity = problem.timeComplexity, !timeComplexity.isEmpty {
                             HStack {
@@ -300,10 +298,8 @@ struct ProblemDetailView: View {
         .padding(24)
     }
 
-    // REPLACE your actionButtons with this:
     private var actionButtons: some View {
         VStack(spacing: 20) {
-            // Modern practice coding button
             Button(action: {
                 showingCodingView = true
             }) {
