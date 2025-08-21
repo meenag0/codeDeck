@@ -21,12 +21,22 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack(path: $navigationPath) {
+            ZStack {
+                LinearGradient(
+                    colors: [Color.deepBlack, Color.charcoal],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+                .ignoresSafeArea()
+                
             VStack(alignment: .leading, spacing: 0) {
                 headerSection
                 searchSection
                 contentSection
             }
             .padding(.horizontal)
+            }
+            .preferredColorScheme(.dark)
             .onAppear {
                 Task {
                     await viewModel.loadCategories()
@@ -51,8 +61,8 @@ struct ContentView: View {
     private var headerSection: some View {
         HStack {
             Text("Practice")
-                .font(.largeTitle)
-                .fontWeight(.bold)
+                .font(FontStyle.displayLarge)
+                .foregroundColor(.primaryText)
             Spacer()
         }
         .padding(.vertical)
@@ -113,24 +123,26 @@ struct ContentView: View {
     
     // MARK: - Error View
     private func errorView(message: String) -> some View {
-        VStack(spacing: 16) {
-            Image(systemName: "exclamationmark.triangle")
+        VStack(spacing: 20) {
+            Image(systemName: "exclamationmark.triangle.fill")
                 .font(.system(size: 48))
-                .foregroundColor(.orange)
+                .foregroundColor(.warningOrange)
             
             Text("Something went wrong")
-                .font(.headline)
+                .font(FontStyle.displaySmall)
+                .foregroundColor(.primaryText)
             
             Text(message)
-                .font(.body)
-                .foregroundColor(.secondary)
+                .font(FontStyle.bodyMedium)
+                .foregroundColor(.secondaryText)
                 .multilineTextAlignment(.center)
             
             Button("Try Again") {
                 Task {
                     await viewModel.loadCategories()
-                }            }
-            .buttonStyle(.borderedProminent)
+                }
+            }
+            .buttonStyle(PrimaryButtonStyle())
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
@@ -163,3 +175,4 @@ struct ContentView: View {
         }
     }
 }
+

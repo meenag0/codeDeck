@@ -13,6 +13,7 @@
 		CB4A635B2E536F7300EEF16A /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4A635A2E536F6E00EEF16A /* AppConfig.swift */; };
 		CB4A636A2E538AF600EEF16A /* OllamaModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4A63682E538AF600EEF16A /* OllamaModels.swift */; };
 		CB4A636F2E538B9C00EEF16A /* CodeCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4A636E2E538B9700EEF16A /* CodeCheck.swift */; };
+		CB4A63712E56695C00EEF16A /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4A63702E56695800EEF16A /* Theme.swift */; };
 		CB8E3DF82E3583C700CC856D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E3DF62E3583C700CC856D /* ContentView.swift */; };
 		CB8E3E0D2E359B4C00CC856D /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E3E0C2E359B4600CC856D /* CategoryView.swift */; };
 		CB8E3E0F2E359B8F00CC856D /* ProblemRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8E3E0E2E359B8B00CC856D /* ProblemRowView.swift */; };
@@ -58,6 +59,7 @@
 		CB4A635A2E536F6E00EEF16A /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		CB4A63682E538AF600EEF16A /* OllamaModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OllamaModels.swift; sourceTree = "<group>"; };
 		CB4A636E2E538B9700EEF16A /* CodeCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeCheck.swift; sourceTree = "<group>"; };
+		CB4A63702E56695800EEF16A /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		CB5A013A2E2457D200DDDEE9 /* codeDeck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = codeDeck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB5A01482E2457D200DDDEE9 /* codeDeckTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = codeDeckTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB5A01522E2457D200DDDEE9 /* codeDeckUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = codeDeckUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -255,6 +257,7 @@
 		CBC2D5342E30FF6300D40BA1 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				CB4A63702E56695800EEF16A /* Theme.swift */,
 				CB4A63542E518AAF00EEF16A /* Config.swift */,
 				CBC2D5372E31047600D40BA1 /* Extensions */,
 				CBC2D5352E3100C000D40BA1 /* Constants.swift */,
@@ -437,6 +440,7 @@
 				CB8E3E1A2E36E00A00CC856D /* CategoryViewModel.swift in Sources */,
 				CBC2D5332E30FDB500D40BA1 /* Category.swift in Sources */,
 				CB8E3E1F2E411ECF00CC856D /* CodeSolView.swift in Sources */,
+				CB4A63712E56695C00EEF16A /* Theme.swift in Sources */,
 				CB4A63552E518AB100EEF16A /* Config.swift in Sources */,
 				CB8E3E572E4BBD8B00CC856D /* DatabaseManager.swift in Sources */,
 				CB4A636F2E538B9C00EEF16A /* CodeCheck.swift in Sources */,

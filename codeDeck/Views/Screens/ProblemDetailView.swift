@@ -25,6 +25,13 @@ struct ProblemDetailView: View {
     }
     
     var body: some View {
+        ZStack {
+            LinearGradient(
+                colors: [Color.deepBlack, Color.charcoal, Color.darkGray],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .ignoresSafeArea()
         GeometryReader { geometry in
             VStack(spacing: 0) {
                 navigationBar
@@ -34,11 +41,13 @@ struct ProblemDetailView: View {
                     .padding(.horizontal)
                     .padding(.vertical, 8)
                 
+                
                 actionButtons
                     .padding(.top, 10)
             }
+            }
         }
-        .background(Color(.systemBackground))
+        .preferredColorScheme(.dark)
         .navigationBarHidden(true)
         .navigationDestination(isPresented: $showingCodingView) {
             CodingSolutionView(problem: problem)
@@ -52,32 +61,43 @@ struct ProblemDetailView: View {
             }) {
                 Image(systemName: "arrow.left")
                     .font(.title2)
-                    .foregroundColor(.primary)
+                    .foregroundColor(.matrixGreen)
             }
-            
+            .buttonStyle(IconButtonStyle(color: .matrixGreen, size: 44))
+
             Spacer()
-            
+
+            VStack {
             Text(problem.title)
-                .font(.headline)
-                .fontWeight(.semibold)
-                .lineLimit(1)
-            
+                .font(FontStyle.displaySmall)
+                .foregroundColor(.primaryText)
+                .fontWeight(.bold)
+                .lineLimit(2)
+                .multilineTextAlignment(.center)
+        }
             Spacer()
             
             // status
             if let status = problem.status {
-                Image(systemName: status.icon)
-                    .foregroundColor(status.color)
-                    .font(.title2)
+                VStack(spacing: 4) {
+                    Image(systemName: status.modernIcon)
+                        .foregroundColor(status.modernColor)
+                        .font(.system(size: 20, weight: .semibold))
+                    
+                    Text(status.displayName)
+                        .font(FontStyle.footnote)
+                        .foregroundColor(status.modernColor)
+                }
             } else {
-                Image(systemName: "circle")
-                    .foregroundColor(.clear)
-                    .font(.title2)
+                Circle()
+                    .fill(Color.tertiaryText)
+                    .frame(width: 8, height: 8)
             }
         }
-        .padding()
-        .background(Color(.systemBackground))
+        .padding(.horizontal, 20)
+        .padding(.vertical, 16)
     }
+    
         
     private var flashcard: some View {
         ZStack {
@@ -99,195 +119,247 @@ struct ProblemDetailView: View {
                     )
             }
         }
-        .background(Color(.systemBackground))
-        .cornerRadius(16)
-        .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
-        .overlay(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(Color(.systemGray5), lineWidth: 1)
-        )
-        .onTapGesture {
+        .background(
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color.charcoal)
+                .shadow(color: Color.matrixGreen.opacity(0.1), radius: 20, x: 0, y: 8)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(
+                            LinearGradient(
+                                colors: [Color.matrixGreen.opacity(0.3), Color.matrixGreen.opacity(0.1)],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            ),
+                            lineWidth: 1.5
+                        )
+                )
+        )        .onTapGesture {
             withAnimation(.easeInOut(duration: 0.6)) {
                 isFlipped.toggle()
             }
         }
     }
     
+    // REPLACE your problemCard with this:
     private var problemCard: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            // header
+        VStack(alignment: .leading, spacing: 24) {
+            // modern header
             HStack {
-                Text(problem.difficulty.rawValue)
-                    .font(.caption)
-                    .fontWeight(.medium)
+                Text(problem.difficulty.rawValue.uppercased())
+                    .font(FontStyle.caption)
+                    .fontWeight(.bold)
+                    .foregroundColor(.deepBlack)
                     .padding(.horizontal, 12)
                     .padding(.vertical, 6)
-                    .background(problem.difficulty.color.opacity(0.2))
-                    .foregroundColor(problem.difficulty.color)
-                    .cornerRadius(12)
+                    .background(
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(problem.difficulty.modernColor)
+                    )
                 
                 Spacer()
                 
-                Text("Problem")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                VStack(spacing: 4) {
+                    Text("PROBLEM")
+                        .font(FontStyle.footnote)
+                        .foregroundColor(.matrixGreen)
+                        .fontWeight(.bold)
+                    
+                    Rectangle()
+                        .fill(Color.matrixGreen)
+                        .frame(width: 40, height: 2)
+                }
             }
             
-            // problem Description
+            // Problem description
             ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
+                VStack(alignment: .leading, spacing: 20) {
                     Text(problem.description ?? "No description available")
-                        .font(.body)
-                        .foregroundColor(.primary)
+                        .font(FontStyle.bodyLarge)
+                        .foregroundColor(.primaryText)
+                        .lineSpacing(4)
                     
-                    // Example
+                    // Modern example section
                     if let example = problem.example, !example.isEmpty {
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("Example:")
-                                .font(.subheadline)
-                                .fontWeight(.semibold)
+                        VStack(alignment: .leading, spacing: 12) {
+                            HStack {
+                                Image(systemName: "lightbulb.fill")
+                                    .foregroundColor(.matrixGreen)
+                                    .font(.system(size: 16))
+                                
+                                Text("Example")
+                                    .font(FontStyle.bodyLarge)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.matrixGreen)
+                            }
                             
                             Text(example)
-                                .font(.system(.body, design: .monospaced))
-                                .padding(.horizontal, 12)
-                                .fixedSize(horizontal: false, vertical: true)
-                                .padding(.vertical, 8)
-                                .background(Color(.systemGray6))
-                                .cornerRadius(8)
+                                .font(FontStyle.codeMedium)
+                                .foregroundColor(.primaryText)
+                                .padding(16)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .fill(Color.darkGray)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 12)
+                                                .stroke(Color.mediumGray, lineWidth: 1)
+                                        )
+                                )
                         }
                     }
                 }
+            }
+            
+            // Subtle flip instruction
+            HStack {
+                Spacer()
+                Image(systemName: "arrow.triangle.2.circlepath")
+                    .foregroundColor(.matrixGreen.opacity(0.6))
+                    .font(.system(size: 16))
+                Spacer()
             }
         }
         .padding(24)
     }
     
+
+    // REPLACE your solutionCard with this:
     private var solutionCard: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            // header
+        VStack(alignment: .leading, spacing: 24) {
+            // Modern header
             HStack {
-                
                 Spacer()
                 
-                Text("Solution")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .fixedSize(horizontal: false, vertical: true)
+                VStack(spacing: 4) {
+                    Text("SOLUTION")
+                        .font(FontStyle.footnote)
+                        .foregroundColor(.matrixGreen)
+                        .fontWeight(.bold)
+                    
+                    Rectangle()
+                        .fill(Color.matrixGreen)
+                        .frame(width: 50, height: 2)
+                }
             }
             
-            // solution Content
+            // Solution content
             ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
-                    // approach
+                VStack(alignment: .leading, spacing: 20) {
+                    // Approach
                     if let solution = problem.solution, !solution.isEmpty {
                         Text(solution)
-                            .font(.body)
-                            .foregroundColor(.primary)
+                            .font(FontStyle.bodyLarge)
+                            .foregroundColor(.primaryText)
+                            .lineSpacing(4)
                     } else {
                         Text("No solution available")
-                            .font(.body)
-                            .foregroundColor(.secondary)
+                            .font(FontStyle.bodyLarge)
+                            .foregroundColor(.secondaryText)
                     }
-
                     
-                    // complexity
-                    VStack(alignment: .leading, spacing: 8) {
+                    // Modern complexity section
+                    VStack(alignment: .leading, spacing: 12) {
                         if let timeComplexity = problem.timeComplexity, !timeComplexity.isEmpty {
                             HStack {
-                                Text("Time:")
-                                    .fontWeight(.semibold)
+                                HStack(spacing: 6) {
+                                    Image(systemName: "clock.fill")
+                                        .foregroundColor(.matrixGreen)
+                                        .font(.system(size: 12))
+                                    Text("Time:")
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(.primaryText)
+                                }
                                 Text(timeComplexity)
-                                    .font(.system(.body, design: .monospaced))
-                                    .foregroundColor(.green)
+                                    .font(FontStyle.codeMedium)
+                                    .foregroundColor(.matrixGreen)
                             }
                         }
                         
                         if let spaceComplexity = problem.spaceComplexity, !spaceComplexity.isEmpty {
                             HStack {
-                                Text("Space:")
-                                    .fontWeight(.semibold)
+                                HStack(spacing: 6) {
+                                    Image(systemName: "memorychip.fill")
+                                        .foregroundColor(.blueAccent)
+                                        .font(.system(size: 12))
+                                    Text("Space:")
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(.primaryText)
+                                }
                                 Text(spaceComplexity)
-                                    .font(.system(.body, design: .monospaced))
-                                    .foregroundColor(.blue)
+                                    .font(FontStyle.codeMedium)
+                                    .foregroundColor(.blueAccent)
                             }
                         }
                     }
-                    .font(.caption)
-                    
-
+                    .font(FontStyle.bodyMedium)
                 }
             }
             
-            // flip instruction
-            HStack {
-                Spacer()
-                Text("tap to flip")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 6)
-                    .background(Color(.systemGray6))
-                    .cornerRadius(12)
-                Spacer()
-            }
+
         }
         .padding(24)
     }
-    
 
+    // REPLACE your actionButtons with this:
     private var actionButtons: some View {
-        VStack(spacing: 16) {
-            // practice coding button
-            
-            
+        VStack(spacing: 20) {
+            // Modern practice coding button
             Button(action: {
                 showingCodingView = true
             }) {
-                HStack {
+                HStack(spacing: 12) {
                     Image(systemName: "code")
-                    Text("Practice")
+                        .font(.system(size: 18, weight: .semibold))
+                    Text("Practice Coding")
+                        .font(FontStyle.bodyLarge)
+                        .fontWeight(.semibold)
                 }
-                .font(.body)
-                .fontWeight(.semibold)
-                .foregroundColor(.white)
+                .foregroundColor(.deepBlack)
                 .frame(maxWidth: .infinity)
-                .padding(.vertical, 16)
-                .background(Color.blue)
-                .cornerRadius(12)
+                .padding(.vertical, 18)
+                .background(
+                    RoundedRectangle(cornerRadius: 14)
+                        .fill(Color.matrixGreen)
+                        .shadow(color: Color.matrixGreen.opacity(0.3), radius: 8, x: 0, y: 4)
+                )
             }
             
-            // status buttons (secondary actions)
-            HStack(spacing: 40) {
-                // Red X button
+            // Clean status buttons
+            HStack(spacing: 50) {
+                // Clean X button
                 Button(action: {
                     print("Marked incorrect")
                     updateProblemStatus(.attempted)
                 }) {
                     Image(systemName: "xmark")
-                        .font(.title2)
-                        .fontWeight(.bold)
+                        .font(.system(size: 20, weight: .bold))
                         .foregroundColor(.white)
-                        .frame(width: 50, height: 50)
-                        .background(Color.red)
-                        .clipShape(Circle())
+                        .frame(width: 60, height: 60)
+                        .background(
+                            Circle()
+                                .fill(Color.errorRed)
+                                .shadow(color: Color.errorRed.opacity(0.3), radius: 8, x: 0, y: 4)
+                        )
                 }
                 
-                // green checkmark button
+                // Clean checkmark button
                 Button(action: {
                     print("Marked correct")
                     updateProblemStatus(.completed)
                 }) {
                     Image(systemName: "checkmark")
-                        .font(.title2)
-                        .fontWeight(.bold)
+                        .font(.system(size: 20, weight: .bold))
                         .foregroundColor(.white)
-                        .frame(width: 50, height: 50)
-                        .background(Color.green)
-                        .clipShape(Circle())
+                        .frame(width: 60, height: 60)
+                        .background(
+                            Circle()
+                                .fill(Color.successGreen)
+                                .shadow(color: Color.successGreen.opacity(0.3), radius: 8, x: 0, y: 4)
+                        )
                 }
             }
         }
-        .padding(.horizontal)
+        .padding(.horizontal, 20)
         .padding(.bottom, 30)
     }
     
@@ -300,17 +372,3 @@ struct ProblemDetailView: View {
     }
 }
 
-
-// MARK: - Preview
-struct ProblemDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProblemDetailView(
-            problem: Problem(
-                id: "two-sum",
-                title: "Two Sum",
-                difficulty: .easy,
-                status: .attempted
-            )
-        )
-    }
-}
