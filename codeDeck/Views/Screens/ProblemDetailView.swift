@@ -74,7 +74,7 @@ struct ProblemDetailView: View {
                 .fontWeight(.bold)
                 .lineLimit(2)
                 .multilineTextAlignment(.center)
-        }
+            }
             Spacer()
             
             // status
@@ -143,33 +143,6 @@ struct ProblemDetailView: View {
     
     private var problemCard: some View {
         VStack(alignment: .leading, spacing: 24) {
-            // modern header
-            HStack {
-                Text(problem.difficulty.rawValue.uppercased())
-                    .font(FontStyle.caption)
-                    .fontWeight(.bold)
-                    .foregroundColor(.deepBlack)
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 6)
-                    .background(
-                        RoundedRectangle(cornerRadius: 8)
-                            .fill(problem.difficulty.modernColor)
-                    )
-                
-                Spacer()
-                
-                VStack(spacing: 4) {
-                    Text("PROBLEM")
-                        .font(FontStyle.footnote)
-                        .foregroundColor(.matrixGreen)
-                        .fontWeight(.bold)
-                    
-                    Rectangle()
-                        .fill(Color.matrixGreen)
-                        .frame(width: 40, height: 2)
-                }
-            }
-            
             // problem description
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
@@ -208,15 +181,6 @@ struct ProblemDetailView: View {
                     }
                 }
             }
-            
-            // subtle flip instruction
-            HStack {
-                Spacer()
-                Image(systemName: "arrow.triangle.2.circlepath")
-                    .foregroundColor(.matrixGreen.opacity(0.6))
-                    .font(.system(size: 16))
-                Spacer()
-            }
         }
         .padding(24)
     }
@@ -224,21 +188,6 @@ struct ProblemDetailView: View {
 
     private var solutionCard: some View {
         VStack(alignment: .leading, spacing: 24) {
-            // modern header
-            HStack {
-                Spacer()
-                
-                VStack(spacing: 4) {
-                    Text("SOLUTION")
-                        .font(FontStyle.footnote)
-                        .foregroundColor(.matrixGreen)
-                        .fontWeight(.bold)
-                    
-                    Rectangle()
-                        .fill(Color.matrixGreen)
-                        .frame(width: 50, height: 2)
-                }
-            }
             
             // solution content
             ScrollView {
@@ -255,7 +204,6 @@ struct ProblemDetailView: View {
                             .foregroundColor(.secondaryText)
                     }
                     
-                    // modern complexity section
                     VStack(alignment: .leading, spacing: 12) {
                         if let timeComplexity = problem.timeComplexity, !timeComplexity.isEmpty {
                             HStack {
@@ -320,9 +268,9 @@ struct ProblemDetailView: View {
                 )
             }
             
-            // Clean status buttons
+            // status buttons
             HStack(spacing: 50) {
-                // Clean X button
+                // X button
                 Button(action: {
                     print("Marked incorrect")
                     updateProblemStatus(.attempted)
@@ -338,7 +286,6 @@ struct ProblemDetailView: View {
                         )
                 }
                 
-                // Clean checkmark button
                 Button(action: {
                     print("Marked correct")
                     updateProblemStatus(.completed)

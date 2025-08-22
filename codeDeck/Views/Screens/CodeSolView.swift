@@ -234,8 +234,14 @@ struct CodingSolutionView: View {
         isChecking = true
         errorMessage = nil
         defer { isChecking = false }
+        
         do {
-            let result = try await codeChecker.checkCode(userSolution, for: problem)
+            guard let referenceSolution = problem.solution else {
+                errorMessage = "No reference solution found for this problem"
+                return
+            }
+            
+            let result = try await codeChecker.checkCode(userSolution, for: problem, against: referenceSolution)
             checkResult = result
         } catch {
             errorMessage = "Failed to check solution: \(error.localizedDescription)"
