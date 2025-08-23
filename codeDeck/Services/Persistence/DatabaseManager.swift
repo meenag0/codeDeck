@@ -30,11 +30,8 @@ actor DatabaseManager {
     private let problemCategoryId = Expression<String>("categoryId")
     
     private let problemDescription = Expression<String?>("description")
-    private let problemHints = Expression<String?>("hints") // JSON string
     private let problemExample = Expression<String?>("example")
     private let problemSolution = Expression<String?>("solution")
-    private let problemTimeComplexity = Expression<String?>("timeComplexity")
-    private let problemSpaceComplexity = Expression<String?>("spaceComplexity")
 
 
     private init() { }
@@ -69,11 +66,8 @@ actor DatabaseManager {
             t.column(problemStatus)
             t.column(problemCategoryId)
             t.column(problemDescription)
-            t.column(problemHints)
             t.column(problemExample)
             t.column(problemSolution)
-            t.column(problemTimeComplexity)
-            t.column(problemSpaceComplexity)
         })
     }
     
@@ -112,8 +106,6 @@ actor DatabaseManager {
                     description: row[problemDescription],
                     example: row[problemExample],
                     solution: row[problemSolution],
-                    timeComplexity: row[problemTimeComplexity],
-                    spaceComplexity: row[problemSpaceComplexity]
                 ))
             }
         } catch {
@@ -155,8 +147,6 @@ actor DatabaseManager {
                 problemDescription <- description,
                 problemExample <- example,
                 problemSolution <- solution,
-                problemTimeComplexity <- timeComplexity,
-                problemSpaceComplexity <- spaceComplexity
             )
             try db.run(insert)
         } catch {
@@ -182,9 +172,7 @@ actor DatabaseManager {
             try db.run(problemToUpdate.update(
                 self.problemDescription <- description,
                 self.problemExample <- example,
-                self.problemSolution <- solution,
-                self.problemTimeComplexity <- timeComplexity,
-                self.problemSpaceComplexity <- spaceComplexity
+                self.problemSolution <- solution
             ))
         } catch {
             print("Error updating problem details: \(error)")

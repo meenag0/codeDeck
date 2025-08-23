@@ -32,15 +32,13 @@ final class CodeCheckingService: CodeCheckingServiceProtocol {
                 feedback: "No code provided. Please write a solution to solve the \(problem.title) problem.",
                 suggestions: ["Write a function that solves the \(problem.title) problem", "Review the problem description and requirements"],
                 errors: ["Empty code submission"],
-                timeComplexity: nil,
-                spaceComplexity: nil,
                 executionOutput: nil
             )
         }
         
         let prompt = buildComparisonPrompt(userCode: trimmedCode, problem: problem, referenceSolution: solution)
         
-        print("📨 SENDING COMPARISON ANALYSIS REQUEST")
+        print("SENDING COMPARISON ANALYSIS REQUEST")
         
         let req = OllamaRequest(
             model: model,
@@ -52,7 +50,7 @@ final class CodeCheckingService: CodeCheckingServiceProtocol {
         
         let startTime = Date()
         let data = try await postJSON(to: endpoint, body: req)
-        let requestDuration = Date().timeIntervalSince(startTime)
+        _ = Date().timeIntervalSince(startTime)
         
         let ollama = try JSONDecoder().decode(OllamaResponse.self, from: data)
         
@@ -67,31 +65,40 @@ final class CodeCheckingService: CodeCheckingServiceProtocol {
 private extension CodeCheckingService {
     func buildComparisonPrompt(userCode: String, problem: Problem, referenceSolution: String) -> String {
         """
-        Compare the user's code against the reference solution. Determine if they solve the problem using a similar approach.
+        You are a strict code comparator. Compare the USER CODE to the REFERENCE SOLUTION.
+
+        GOAL: Determine if the USER CODE is functionally equivalent to the REFERENCE SOLUTION.
+        Functional equivalence means:
+        - Produces the same outputs for all valid inputs
+        - Preserves return values, loops, and conditionals
+        - Variable names, formatting, or minor ordering differences DO NOT matter
+        - If USER CODE omits or changes essential functionality (e.g., missing return, incorrect loop condition, altered logic), mark it incorrect
+
+        EDGE CASES:
+        - Different variable names → still correct
+        - Extra print/logging statements → still correct
+        - Missing return, wrong condition, or incorrect calculation → incorrect
+        - Code that only partially solves the problem → incorrect
+        - Structural reordering (helper functions, inline vs extract) → correct if functionality is preserved
 
         PROBLEM: \(problem.title)
 
         REFERENCE SOLUTION:
         \(referenceSolution)
 
-        USER'S CODE:
+        USER CODE:
         \(userCode)
 
         Return ONLY valid JSON with no extra text, markdown, or formatting:
         {
           "isCorrect": true/false,
-          "feedback": "Brief 1-2 sentence explanation of correctness",
+          "feedback": "One short sentence explaining if the user code matches the reference solution functionality.",
           "suggestions": [],
           "errors": []
         }
-
-        Rules:
-        - Mark as correct if the approach is similar and would solve the problem
-        - Keep feedback to maximum 2 sentences
-        - Leave suggestions and errors arrays empty
-        - No newlines in JSON strings
         """
     }
+
     
     func parseToStrictJSON(_ response: String) -> CodeCheckResult {
         
@@ -123,8 +130,6 @@ private extension CodeCheckingService {
                 feedback: analysis.feedback,
                 suggestions: analysis.suggestions,
                 errors: analysis.errors,
-                timeComplexity: nil,
-                spaceComplexity: nil,
                 executionOutput: cleanedResponse
             )
         } catch {
@@ -153,8 +158,6 @@ private extension CodeCheckingService {
             feedback: feedback,
             suggestions: [],
             errors: [],
-            timeComplexity: nil,
-            spaceComplexity: nil,
             executionOutput: response
         )
     }

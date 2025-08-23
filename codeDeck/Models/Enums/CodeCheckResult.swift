@@ -12,8 +12,6 @@ struct CodeCheckResult {
     let feedback: String
     let suggestions: [String]
     let errors: [String]
-    let timeComplexity: String?
-    let spaceComplexity: String?
     let executionOutput: String?
 }
 
